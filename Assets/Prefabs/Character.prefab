@@ -41,7 +41,7 @@ Transform:
   m_Children:
   - {fileID: 169827280370364732}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &134508833
 MonoBehaviour:
@@ -209,7 +209,7 @@ MonoBehaviour:
   inventoryUI: {fileID: 0}
   inventory: {fileID: 5594160429930943339}
   initialItems:
-  - quantity: 2
+  - quantity: 15
     item: {fileID: 11400000, guid: 426fe6140c4aee74491f373bf807fe0a, type: 2}
     itemState: []
   _playerInventory: {fileID: 6690406480024723478, guid: 57b318034b4538a40b6ed0467df114fa, type: 3}
@@ -243,7 +243,7 @@ MonoBehaviour:
   inventoryData: {fileID: 0}
   parametersToModify:
   - itemParameter: {fileID: 11400000, guid: 47b9563758865044d82d5164483880a1, type: 2}
-    value: -10
+    value: -1
   itemCurrentState: []
 --- !u!1 &169827280370364735
 GameObject:

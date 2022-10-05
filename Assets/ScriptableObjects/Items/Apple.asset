@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb99d69ac1b1c544f92615cde35348b0, type: 3}
+  m_Name: Apple
+  m_EditorClassIdentifier: 
+  <isStackable>k__BackingField: 1
+  <MaxStackSize>k__BackingField: 20
+  <Name>k__BackingField: 'Apple '
+  <Description>k__BackingField: One of these a day, keeps the doctor away.
+  <ItemImage>k__BackingField: {fileID: 629826047, guid: 613c586fe2b91a54c822cf44f1147ed9, type: 3}
+  modifiersData:
+  - statModifier: {fileID: 11400000, guid: 9e99977de40038347b0475c69afaf131, type: 2}
+    value: 2

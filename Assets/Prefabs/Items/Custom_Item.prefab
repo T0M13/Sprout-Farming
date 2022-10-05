@@ -100,7 +100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <InventoryItem>k__BackingField: {fileID: 0}
   <Quantity>k__BackingField: 0
-  audioSource: {fileID: 0}
   duration: 0.3
 --- !u!58 &5545832923058253876
 CircleCollider2D:
@@ -115,6 +114,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.043159008}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.48450792
+  m_Radius: 0.4

@@ -24,6 +24,11 @@ public class AgentItem : MonoBehaviour
         if (inventory == null) Debug.LogWarning("Inventory is missing");
     }
 
+    /// <summary>
+    /// Equips the item
+    /// </summary>
+    /// <param name="equippableItemSO"></param>
+    /// <param name="itemState"></param>
     public void SetItem(EquippableItemSO equippableItemSO, List<ItemParameter> itemState)
     {
         if (equippableItem != null)
@@ -32,9 +37,14 @@ public class AgentItem : MonoBehaviour
         }
         this.equippableItem = equippableItemSO;
         this.itemCurrentState = new List<ItemParameter>(itemState);
-        ModifyParameters();
+
+        //Modify the item when the equipped item has been used
+        //ModifyParameters();
     }
 
+    /// <summary>
+    /// Add/Subract - Modify the parameter that exists on an item
+    /// </summary>
     private void ModifyParameters()
     {
         foreach (var parameter in parametersToModify)

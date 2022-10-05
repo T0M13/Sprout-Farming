@@ -32,6 +32,9 @@ namespace Inventory
         }
         #endregion
 
+        /// <summary>
+        /// Get the Inventory from Character
+        /// </summary>
         private void Awake()
         {
             if (inventoryUI == null)
@@ -45,6 +48,9 @@ namespace Inventory
 
         }
 
+        /// <summary>
+        /// Prepares the Inventory UI and Data
+        /// </summary>
         private void Start()
         {
             PrepareUI();

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 namespace Inventory
 {
@@ -146,10 +147,22 @@ namespace Inventory
             if (inventoryItem.IsEmpty)
                 return;
 
-            Vector3 itemSpawnOffset = new Vector3(5, 0, 0);
+            Vector3 itemSpawnOffset = DropOffset();
+            
+            //check if its on water or other unreachable places
+
             GameObject itemClone = Instantiate(inventoryData.customItemPrefab, transform.position + itemSpawnOffset, Quaternion.identity);
+            itemClone.name = $"{inventoryItem.item.name}_Item";
             Item itemScript = itemClone.GetComponent<Item>();
             itemScript.SetItem(inventoryItem.item, quantity);
+        }
+
+        private Vector3 DropOffset()
+        {
+
+            float randomPositionX = Random.Range(0, 2) * 2 - 1;
+            float randomPositionY = Random.Range(0, 2) * 2 - 1;
+            return new Vector3(randomPositionX, randomPositionY, 0);
         }
 
         private void HandleDragging(int itemIndex)

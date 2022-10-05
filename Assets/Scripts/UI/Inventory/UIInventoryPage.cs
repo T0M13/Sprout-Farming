@@ -83,6 +83,11 @@ namespace Inventory.UI
 
         private void HandleEndDrag(UIInventoryItem inventoryItemUI)
         {
+            if (currentlyDraggedItemIndex == -1)
+            {
+                return;
+            }
+
             if (!IsPointerOverUIElement())
             {
                 OnEndDrag?.Invoke(currentlyDraggedItemIndex);
@@ -105,7 +110,7 @@ namespace Inventory.UI
         private void HandleSwap(UIInventoryItem inventoryItemUI)
         {
             int index = listOfUIItems.IndexOf(inventoryItemUI);
-            if (index == -1)
+            if (index == -1 || currentlyDraggedItemIndex == -1)
             {
                 return;
             }

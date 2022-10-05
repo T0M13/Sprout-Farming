@@ -1,4 +1,5 @@
 using Inventory.Model;
+using Inventory.UI;
 using Inventory;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,12 +8,10 @@ using System;
 
 public class AgentItem : MonoBehaviour
 {
-    [SerializeField]
-    private EquippableItemSO equippableItem;
-
-    [SerializeField]
-    private CharacterInventory inventory;
+    [SerializeField] private EquippableItemSO equippableItem;
+    [SerializeField] private CharacterInventory inventory;
     [SerializeField] private InventorySO inventoryData;
+    [SerializeField] private UIInventoryEquipSlot equipSlot;
 
     [SerializeField]
     private List<ItemParameter> parametersToModify, itemCurrentState;
@@ -37,6 +36,7 @@ public class AgentItem : MonoBehaviour
         }
         this.equippableItem = equippableItemSO;
         this.itemCurrentState = new List<ItemParameter>(itemState);
+        equipSlot.SetEquippedItem(equippableItem);
 
         //Modify the item when the equipped item has been used
         //ModifyParameters();

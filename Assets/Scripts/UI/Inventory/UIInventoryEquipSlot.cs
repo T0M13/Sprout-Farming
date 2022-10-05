@@ -9,9 +9,11 @@ namespace Inventory.UI
     {
     
         public UIInventoryItem inventoryItem;
+        [SerializeField] private EquippableItemSO equippableItemSO;
 
         public void SetEquippedItem(EquippableItemSO equippableItemSO)
         {
+            this.equippableItemSO = equippableItemSO;
             inventoryItem.SetData(equippableItemSO.ItemImage, 1);
         }
 

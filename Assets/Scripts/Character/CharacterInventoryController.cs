@@ -79,6 +79,16 @@ namespace Inventory
             inventoryUI.OnSwapItems += HandleSwapItems;
             inventoryUI.OnStartDragging += HandleDragging;
             inventoryUI.OnItemActionRequested += HandleItemActionRequest;
+            inventoryUI.OnEndDrag += HandleEndDrag;
+        }
+
+        private void HandleEndDrag(int itemIndex)
+        {
+            InventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
+            if (inventoryItem.IsEmpty)
+                return;
+
+            DropItem(itemIndex, inventoryItem.quantity);
         }
 
         private void HandleItemActionRequest(int itemIndex)

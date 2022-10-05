@@ -17,10 +17,11 @@ namespace Inventory.UI
         [Header("Items in List")]
         List<UIInventoryItem> listOfUIItems = new List<UIInventoryItem>();
 
-        public event Action<int> OnDescriptionRequested, OnItemActionRequested, OnStartDragging;
+        public event Action<int> OnDescriptionRequested, OnItemActionRequested, OnStartDragging, OnEndDrag;
         public event Action<int, int> OnSwapItems;
 
         private int currentlyDraggedItemIndex = -1;
+        private int UILayer;
 
         /// <summary>
         /// Hides Inventory - and disables the mouse follower - resets item description
@@ -30,6 +31,7 @@ namespace Inventory.UI
             Hide();
             mouseFollower.Toggle(false);
             itemDescription.ResetDescription();
+            UILayer = LayerMask.NameToLayer("UI");
         }
 
         /// <summary>
@@ -81,7 +83,16 @@ namespace Inventory.UI
 
         private void HandleEndDrag(UIInventoryItem inventoryItemUI)
         {
-            ResetDraggedItem();
+            if (!IsPointerOverUIElement())
+            {
+                OnEndDrag?.Invoke(currentlyDraggedItemIndex);
+                ResetDraggedItem();
+            }
+            else
+            {
+                ResetDraggedItem();
+            }
+
         }
 
         internal void UpdateDescription(int itemIndex, Sprite itemImage, string name, string description)
@@ -179,29 +190,14 @@ namespace Inventory.UI
 
 
 
-
-
-        int UILayer;
-
-        private void Start()
-        {
-            UILayer = LayerMask.NameToLayer("UI");
-        }
-
-        private void Update()
-        {
-            print(IsPointerOverUIElement() ? "Over UI" : "Not over UI");
-        }
-
-
-        //Returns 'true' if we touched or hovering on Unity UI element.
+        //Returns 'true' if we are touching or hovering on Unity UI element.
         public bool IsPointerOverUIElement()
         {
             return IsPointerOverUIElement(GetEventSystemRaycastResults());
         }
 
 
-        //Returns 'true' if we touched or hovering on Unity UI element.
+        //Returns 'true' if we are touching or hovering on Unity UI element.
         private bool IsPointerOverUIElement(List<RaycastResult> eventSystemRaysastResults)
         {
             for (int index = 0; index < eventSystemRaysastResults.Count; index++)
@@ -212,7 +208,6 @@ namespace Inventory.UI
             }
             return false;
         }
-
 
         //Gets all event system raycast results of current mouse or touch position.
         static List<RaycastResult> GetEventSystemRaycastResults()

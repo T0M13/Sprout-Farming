@@ -30,7 +30,7 @@ public class CharacterInteraction : MonoBehaviour
     {
         _collider = Physics2D.OverlapCircle(transform.position, interactionRadius, interactionMask);
         if (_collider == null) return;
-        if (_collider.GetComponent<InteractableInterface>() != null)
+        if (_collider.GetComponent<InteractableInterface>() != null && !_collider.isTrigger)
         {
             interactable = _collider.GetComponent<InteractableInterface>();
             if (_playerInteraction.action.triggered)

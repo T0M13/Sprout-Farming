@@ -51,6 +51,15 @@ namespace Inventory.UI
             }
         }
 
+        public virtual void DisposeInventoryUI()
+        {
+            for (int i = 0; i < listOfUIItems.Count; i++)
+            {
+                Destroy(contentPanel.GetChild(i).gameObject);
+            }
+            listOfUIItems.Clear();
+        }
+
         public virtual void ResetAllItems()
         {
             foreach (var item in listOfUIItems)

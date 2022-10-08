@@ -10,6 +10,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private GameObject _spriteObj;
     [SerializeField] private Animator _animator;
     [Header("Movement")]
+    [SerializeField] private bool canMove = true;
     [SerializeField] private Vector2 moveInput;
     [SerializeField] private float speed;
     [SerializeField] private bool isMoving;
@@ -26,6 +27,8 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private static string A_LastVertical = "LastVertical";
     [SerializeField] private static string A_Speed = "Speed";
     [SerializeField] private static string A_IsRunning = "isRunning";
+
+    public bool CanMove { get => canMove; set => canMove = value; }
 
     #region Input
     private void OnEnable()
@@ -55,10 +58,13 @@ public class CharacterController : MonoBehaviour
 
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = _spriteObj.GetComponent<Animator>();
+
+        canMove = true;
     }
 
     private void Update()
     {
+        if (!canMove) return;
         ReadInput();
         AnimateCharacter();
         HandleSpeed();
@@ -66,6 +72,7 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!canMove) return;
         MoveCharacter();
     }
 

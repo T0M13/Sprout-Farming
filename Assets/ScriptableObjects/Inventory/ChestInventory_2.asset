@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0805396f88fc024eaada352a2c0f7cf, type: 3}
+  m_Name: ChestInventory_2
+  m_EditorClassIdentifier: 
+  inventoryItems:
+  - quantity: 1
+    item: {fileID: 11400000, guid: e923cfe3a3983ad4792f5a324a3aae57, type: 2}
+    itemState:
+    - itemParameter: {fileID: 11400000, guid: 47b9563758865044d82d5164483880a1, type: 2}
+      value: 100
+  <Size>k__BackingField: 1
+  <MaxSize>k__BackingField: 1
+  customItemPrefab: {fileID: 5545832923058253879, guid: bae1f8af19684884b98ea09031898a87, type: 3}

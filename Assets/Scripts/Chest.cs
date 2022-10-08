@@ -1,13 +1,17 @@
+using Inventory;
+using System;
 using UnityEngine;
 
 public class Chest : MonoBehaviour, InteractableInterface
 {
     [Header("References")]
+    public ChestsManager _manager;
     [SerializeField] private Animator _animator;
     [SerializeField] private GameObject _spriteChild;
+    [SerializeField] private ChestInventoryController _inventory;
     [SerializeField] private string currentAnimaton;
     [Header("Stats")]
-    [SerializeField] private bool isOpen;
+    public bool isOpen;
 
     const string OPEN_CHEST = "ChestOpen_Animation";
     const string CLOSE_CHEST = "ChestClose_Animation";
@@ -20,6 +24,8 @@ public class Chest : MonoBehaviour, InteractableInterface
     private void Awake()
     {
         _animator = _spriteChild.GetComponent<Animator>();
+        _inventory = GetComponent<ChestInventoryController>();
+        isOpen = false;
     }
 
     public void Interact()
@@ -29,12 +35,39 @@ public class Chest : MonoBehaviour, InteractableInterface
 
     private void ToggleChest()
     {
+        if (isOpen)
+        {
+            CloseChest();
+        }
+        else
+        {
+            _manager.CloseAllChests();
+            OpenChest();
+        }
+
+    }
+
+    public void OpenChest()
+    {
+        HandleChestDirAndAnimation();
+        isOpen = true;
+        _inventory.inventoryUI.gameObject.SetActive(isOpen);
+    }
+
+    public void CloseChest()
+    {
+        HandleChestDirAndAnimation();
+        isOpen = false;
+        _inventory.inventoryUI.gameObject.SetActive(isOpen);
+    }
+
+
+    private void HandleChestDirAndAnimation()
+    {
         if (isNormal)
             AnimateChest();
         else
             AnimateChestSide();
-        isOpen = !isOpen;
-
     }
 
     private void AnimateChest()
@@ -69,5 +102,12 @@ public class Chest : MonoBehaviour, InteractableInterface
         currentAnimaton = newAnimation;
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && isOpen)
+        {
+            CloseChest();
+        }
+    }
 
 }

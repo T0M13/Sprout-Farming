@@ -55,6 +55,7 @@ namespace Inventory
             }
         }
 
+
         public virtual void UpdateInventoryUI(Dictionary<int, InventoryItem> inventoryState)
         {
             inventoryUI.ResetAllItems();
@@ -73,6 +74,12 @@ namespace Inventory
             inventoryUI.OnStartDragging += HandleDragging;
             inventoryUI.OnItemActionRequested += HandleItemActionRequest;
             inventoryUI.OnEndDrag += HandleEndDrag;
+        }
+
+        public virtual void DerangeUI()
+        {
+            if (inventoryUI == null) return;
+            inventoryUI.DisposeInventoryUI();
         }
 
         public virtual void HandleEndDrag(int itemIndex)
@@ -127,23 +134,22 @@ namespace Inventory
         public virtual void DropItem(int itemIndex, int quantity)
         {
 
-            CreateItem(itemIndex, quantity);
+            CreateItem(itemIndex, quantity, transform.position);
             inventoryData.RemoveItem(itemIndex, quantity);
             inventoryUI.ResetSelection();
 
         }
 
-        public virtual void CreateItem(int itemIndex, int quantity)
+        public virtual void CreateItem(int itemIndex, int quantity, Vector3 position)
         {
             InventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
             if (inventoryItem.IsEmpty)
                 return;
 
             Vector3 itemSpawnOffset = DropOffset();
-
             //check if its on water or other unreachable places
 
-            GameObject itemClone = Instantiate(inventoryData.customItemPrefab, transform.position + itemSpawnOffset, Quaternion.identity);
+            GameObject itemClone = Instantiate(inventoryData.customItemPrefab, position + itemSpawnOffset, Quaternion.identity);
             itemClone.name = $"{inventoryItem.item.name}_Item";
             Item itemScript = itemClone.GetComponent<Item>();
             itemScript.SetItem(inventoryItem.item, quantity);

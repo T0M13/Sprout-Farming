@@ -24,7 +24,7 @@ namespace Inventory.Model
 
         public void Initialize()
         {
-            if(Size >= MaxSize) Size = MaxSize; 
+            if (Size >= MaxSize) Size = MaxSize;
             inventoryItems = new List<InventoryItem>();
             for (int i = 0; i < Size; i++)
             {
@@ -179,14 +179,14 @@ namespace Inventory.Model
                 item = this.item,
                 quantity = newQuantity,
                 itemState = new List<ItemParameter>(this.itemState)
+            };
+        }
+
+        public static InventoryItem GetEmptyItem() => new InventoryItem
+        {
+            item = null,
+            quantity = 0,
+            itemState = new List<ItemParameter>()
         };
     }
-
-    public static InventoryItem GetEmptyItem() => new InventoryItem
-    {
-        item = null,
-        quantity = 0,
-        itemState= new List<ItemParameter>()
-    };
-}
 }

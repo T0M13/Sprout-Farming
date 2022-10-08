@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 570260427699358389}
   m_Layer: 6
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ Transform:
   m_Children:
   - {fileID: 169827280370364732}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &134508833
 MonoBehaviour:
@@ -154,6 +154,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 169827279390815496}
   _spriteObj: {fileID: 169827280370364735}
   _animator: {fileID: 169827280370364738}
+  canMove: 1
   moveInput: {x: 0, y: 0}
   speed: 0
   isMoving: 0
@@ -174,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920d570138b24714792fd5369bd647cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRadius: 1
+  interactionRadius: 0.8
   _collider: {fileID: 0}
   interactionMask:
     serializedVersion: 2
@@ -208,6 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 0}
   inventory: {fileID: 5594160429930943339}
+  inventoryData: {fileID: 0}
   initialItems:
   - quantity: 15
     item: {fileID: 11400000, guid: 426fe6140c4aee74491f373bf807fe0a, type: 2}
@@ -241,6 +243,7 @@ MonoBehaviour:
   equippableItem: {fileID: 0}
   inventory: {fileID: 5594160429930943339}
   inventoryData: {fileID: 0}
+  equipSlot: {fileID: 0}
   parametersToModify:
   - itemParameter: {fileID: 11400000, guid: 47b9563758865044d82d5164483880a1, type: 2}
     value: -1

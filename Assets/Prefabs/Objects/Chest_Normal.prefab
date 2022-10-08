@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7092785138896808015}
   - component: {fileID: 7092785138896808048}
+  - component: {fileID: 1479103779}
   - component: {fileID: 7092785138896808049}
   - component: {fileID: 1803420096}
   - component: {fileID: 1803420097}
@@ -139,7 +140,7 @@ Transform:
   m_Children:
   - {fileID: 7092785138127974577}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &7092785138896808048
 BoxCollider2D:
@@ -167,6 +168,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.91697}
   m_EdgeRadius: 0
+--- !u!61 &1479103779
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7092785138896808050}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.010584354, y: -0.04233718}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.5028172, y: 2.1212883}
+  m_EdgeRadius: 0
 --- !u!114 &7092785138896808049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 7092785138127974579}
   _spriteChild: {fileID: 7092785138127974580}
+  _inventory: {fileID: 0}
   currentAnimaton: 
   isOpen: 0
   isNormal: 1
@@ -212,4 +240,13 @@ MonoBehaviour:
   inventoryUI: {fileID: 0}
   inventory: {fileID: 1803420096}
   inventoryData: {fileID: 0}
-  initialItems: []
+  initialItems:
+  - quantity: 34
+    item: {fileID: 11400000, guid: 426fe6140c4aee74491f373bf807fe0a, type: 2}
+    itemState: []
+  - quantity: 23
+    item: {fileID: 11400000, guid: f47e1130adfa83548b89e2168c63cbc0, type: 2}
+    itemState: []
+  - quantity: 1
+    item: {fileID: 11400000, guid: 3863a27f2c0f6914db83d4e7892f1055, type: 2}
+    itemState: []

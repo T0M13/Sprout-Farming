@@ -21,7 +21,7 @@ namespace Inventory.UI
         }
 
         public void ResetDescription()
-        {
+        {            
             itemImage.gameObject.SetActive(false);
             title.text = "";
             description.text = "";

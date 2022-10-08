@@ -116,6 +116,8 @@ GameObject:
   - component: {fileID: 7092785138896808015}
   - component: {fileID: 7092785138896808048}
   - component: {fileID: 7092785138896808049}
+  - component: {fileID: 1803420096}
+  - component: {fileID: 1803420097}
   m_Layer: 7
   m_Name: Chest_Normal
   m_TagString: Untagged
@@ -137,7 +139,7 @@ Transform:
   m_Children:
   - {fileID: 7092785138127974577}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &7092785138896808048
 BoxCollider2D:
@@ -181,3 +183,33 @@ MonoBehaviour:
   _spriteChild: {fileID: 7092785138127974580}
   currentAnimaton: 
   isOpen: 0
+  isNormal: 1
+--- !u!114 &1803420096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7092785138896808050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2dad4f61a0a6874fab2c03fe06b2cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryData: {fileID: 11400000, guid: 39137a26add602442a5e4ad58c8eaaab, type: 2}
+--- !u!114 &1803420097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7092785138896808050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d684723ddb02e644094ce51137d9ce18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 0}
+  inventory: {fileID: 1803420096}
+  inventoryData: {fileID: 0}
+  initialItems: []

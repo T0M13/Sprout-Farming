@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class PickupController : MonoBehaviour
 {
-    [SerializeField] private CharacterInventory inventory;
+    [SerializeField] private InventoryData inventory;
     private InventorySO inventoryData;
 
     private void Awake()
     {
         if (inventory == null) Debug.LogWarning("Inventory missing");
-        inventory = GetComponent<CharacterInventory>();
+        inventory = GetComponent<InventoryData>();
         inventoryData = inventory.inventoryData;
     }
 

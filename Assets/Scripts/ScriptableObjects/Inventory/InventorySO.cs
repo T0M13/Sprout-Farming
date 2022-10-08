@@ -15,6 +15,8 @@ namespace Inventory.Model
 
         [field: SerializeField]
         public int Size { get; private set; } = 10;
+        [field: SerializeField]
+        public int MaxSize { get; private set; } = 10;
 
         public event Action<Dictionary<int, InventoryItem>> OnInventoryUpdated;
 
@@ -22,6 +24,7 @@ namespace Inventory.Model
 
         public void Initialize()
         {
+            if(Size >= MaxSize) Size = MaxSize; 
             inventoryItems = new List<InventoryItem>();
             for (int i = 0; i < Size; i++)
             {

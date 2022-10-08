@@ -9,28 +9,25 @@ namespace Inventory.UI
     public class UIInventoryPage : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private UIInventoryItem itemPrefab;
-        [SerializeField] private RectTransform contentPanel;
-        [SerializeField] private UIInventoryDescription itemDescription;
-        [SerializeField] private UIMouseFollower mouseFollower;
-        [SerializeField] private ItemActionPanel horizontalActionPanel;
+        public UIInventoryItem itemPrefab;
+        public RectTransform contentPanel;
+        public UIMouseFollower mouseFollower;
         [Header("Items in List")]
-        List<UIInventoryItem> listOfUIItems = new List<UIInventoryItem>();
+        public List<UIInventoryItem> listOfUIItems = new List<UIInventoryItem>();
 
         public event Action<int> OnDescriptionRequested, OnItemActionRequested, OnStartDragging, OnEndDrag;
         public event Action<int, int> OnSwapItems;
 
-        private int currentlyDraggedItemIndex = -1;
-        private int UILayer;
+        public int currentlyDraggedItemIndex = -1;
+        public int UILayer;
 
         /// <summary>
         /// Hides Inventory - and disables the mouse follower - resets item description
         /// </summary>
-        private void Awake()
+        public virtual void Awake()
         {
             Hide();
             mouseFollower.Toggle(false);
-            itemDescription.ResetDescription();
             UILayer = LayerMask.NameToLayer("UI");
         }
 
@@ -38,7 +35,7 @@ namespace Inventory.UI
         /// Starts up the inventory and it initialiues the items
         /// </summary>
         /// <param name="inventorySize"></param>
-        public void InitializeInventoryUI(int inventorySize)
+        public virtual void InitializeInventoryUI(int inventorySize)
         {
             for (int i = 0; i < inventorySize; i++)
             {
@@ -54,7 +51,7 @@ namespace Inventory.UI
             }
         }
 
-        public void ResetAllItems()
+        public virtual void ResetAllItems()
         {
             foreach (var item in listOfUIItems)
             {
@@ -63,7 +60,7 @@ namespace Inventory.UI
             }
         }
 
-        public void UpdateData(int itemIndex, Sprite itemImage, int itemQuantity)
+        public virtual void UpdateData(int itemIndex, Sprite itemImage, int itemQuantity)
         {
             if (listOfUIItems.Count > itemIndex)
             {
@@ -71,17 +68,22 @@ namespace Inventory.UI
             }
         }
 
-        private void HandleShowItemActions(UIInventoryItem inventoryItemUI)
+        public virtual void HandleShowItemActions(UIInventoryItem inventoryItemUI)
         {
             int index = listOfUIItems.IndexOf(inventoryItemUI);
             if (index == -1)
             {
                 return;
             }
+            InvokeOnItemActionRequested(index);
+        }
+
+        public virtual void InvokeOnItemActionRequested(int index)
+        {
             OnItemActionRequested?.Invoke(index);
         }
 
-        private void HandleEndDrag(UIInventoryItem inventoryItemUI)
+        public virtual void HandleEndDrag(UIInventoryItem inventoryItemUI)
         {
             if (currentlyDraggedItemIndex == -1)
             {
@@ -90,7 +92,7 @@ namespace Inventory.UI
 
             if (!IsPointerOverUIElement())
             {
-                OnEndDrag?.Invoke(currentlyDraggedItemIndex);
+                InvokeOnEndDrag(currentlyDraggedItemIndex);
                 ResetDraggedItem();
             }
             else
@@ -100,94 +102,106 @@ namespace Inventory.UI
 
         }
 
-        internal void UpdateDescription(int itemIndex, Sprite itemImage, string name, string description)
+        public virtual void InvokeOnEndDrag(int index)
         {
-            itemDescription.SetDescription(itemImage, name, description);
+            OnEndDrag?.Invoke(currentlyDraggedItemIndex);
+        }
+
+        public virtual void UpdateDescription(int itemIndex, Sprite itemImage, string name, string description)
+        {
             DeselectAllItems();
             listOfUIItems[itemIndex].Select();
         }
 
-        private void HandleSwap(UIInventoryItem inventoryItemUI)
+        public virtual void HandleSwap(UIInventoryItem inventoryItemUI)
         {
             int index = listOfUIItems.IndexOf(inventoryItemUI);
             if (index == -1 || currentlyDraggedItemIndex == -1)
             {
                 return;
             }
-            OnSwapItems?.Invoke(currentlyDraggedItemIndex, index);
+            InvokeOnSwapItems(currentlyDraggedItemIndex, index);
             HandleItemSelection(inventoryItemUI);
         }
 
-        private void ResetDraggedItem()
+        public virtual void InvokeOnSwapItems(int index_1, int index_2)
+        {
+            OnSwapItems?.Invoke(index_1, index_2);
+        }
+
+        public virtual void ResetDraggedItem()
         {
             mouseFollower.Toggle(false);
             currentlyDraggedItemIndex = -1;
         }
 
-        private void HandleBeginDrag(UIInventoryItem inventoryItemUI)
+        public virtual void HandleBeginDrag(UIInventoryItem inventoryItemUI)
         {
             int index = listOfUIItems.IndexOf(inventoryItemUI);
             if (index == -1)
                 return;
             currentlyDraggedItemIndex = index;
-            HandleItemSelection(inventoryItemUI);
+            //HandleItemSelection(inventoryItemUI);
+            InvokeOnStartDragging(index);
+        }
+        public virtual void InvokeOnStartDragging(int index)
+        {
             OnStartDragging?.Invoke(index);
         }
 
-        public void CreateDraggedItem(Sprite sprite, int quantity)
+        public virtual void CreateDraggedItem(Sprite sprite, int quantity)
         {
             mouseFollower.Toggle(true);
             mouseFollower.SetData(sprite, quantity);
         }
 
-        private void HandleItemSelection(UIInventoryItem inventoryItemUI)
+        public virtual void HandleItemSelection(UIInventoryItem inventoryItemUI)
         {
             int index = listOfUIItems.IndexOf(inventoryItemUI);
             if (index == -1)
                 return;
+            InvokeOnDescriptionRequested(index);
+        }
+
+        public virtual void InvokeOnDescriptionRequested(int index)
+        {
             OnDescriptionRequested?.Invoke(index);
         }
 
-        public void Show()
+        public virtual void Show()
         {
             gameObject.SetActive(true);
             ResetSelection();
 
         }
 
-        public void ResetSelection()
+        public virtual void ResetSelection()
         {
-            itemDescription.ResetDescription();
             DeselectAllItems();
         }
 
-        public void AddActionHorizontal(string actionName, Action performAction)
+        public virtual void AddActionHorizontal(string actionName, Action performAction)
         {
-            horizontalActionPanel.AddButton(actionName, performAction);
         }
 
-        public void RefreshAction()
+        public virtual void RefreshAction()
         {
-            horizontalActionPanel.RemoveOldButtons();
         }
 
-        public void ShowHorizontalItemAction(int itemIndex)
+        public virtual void ShowHorizontalItemAction(int itemIndex)
         {
-            horizontalActionPanel.Toggle(true);
         }
 
-        private void DeselectAllItems()
+        public virtual void DeselectAllItems()
         {
             foreach (UIInventoryItem item in listOfUIItems)
             {
                 item.Deselect();
             }
-            horizontalActionPanel.Toggle(false);
         }
 
-        public void Hide()
+        public virtual void Hide()
         {
-            horizontalActionPanel.Toggle(false);
             gameObject.SetActive(false);
             ResetDraggedItem();
         }
@@ -195,15 +209,16 @@ namespace Inventory.UI
 
 
 
+
         //Returns 'true' if we are touching or hovering on Unity UI element.
-        public bool IsPointerOverUIElement()
+        public virtual bool IsPointerOverUIElement()
         {
             return IsPointerOverUIElement(GetEventSystemRaycastResults());
         }
 
 
         //Returns 'true' if we are touching or hovering on Unity UI element.
-        private bool IsPointerOverUIElement(List<RaycastResult> eventSystemRaysastResults)
+        public virtual bool IsPointerOverUIElement(List<RaycastResult> eventSystemRaysastResults)
         {
             for (int index = 0; index < eventSystemRaysastResults.Count; index++)
             {
@@ -215,7 +230,7 @@ namespace Inventory.UI
         }
 
         //Gets all event system raycast results of current mouse or touch position.
-        static List<RaycastResult> GetEventSystemRaycastResults()
+        public virtual List<RaycastResult> GetEventSystemRaycastResults()
         {
             PointerEventData eventData = new PointerEventData(EventSystem.current);
             eventData.position = Input.mousePosition;

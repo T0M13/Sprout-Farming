@@ -9,7 +9,7 @@ using System;
 public class AgentItem : MonoBehaviour
 {
     [SerializeField] private EquippableItemSO equippableItem;
-    [SerializeField] private CharacterInventory inventory;
+    [SerializeField] private InventoryData inventory;
     [SerializeField] private InventorySO inventoryData;
     [SerializeField] private UIInventoryEquipSlot equipSlot;
 
@@ -18,7 +18,7 @@ public class AgentItem : MonoBehaviour
 
     private void Awake()
     {
-        inventory = GetComponent<CharacterInventory>();
+        inventory = GetComponent<InventoryData>();
         inventoryData = inventory.inventoryData;
         if (inventory == null) Debug.LogWarning("Inventory is missing");
     }
